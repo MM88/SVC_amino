@@ -56,7 +56,7 @@ def train_layer3(yaml_file_path):
 
 def train_stack():
 
-    train_layer1("./dae_l1.yaml",)
+    #train_layer1("./dae_l1.yaml",)
     pkl_file = open('./dae_l1.pkl', 'rb')
     model = pickle.load(pkl_file)
     W_1 = model.get_weights(borrow=True)
