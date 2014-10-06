@@ -23,10 +23,8 @@ def svc_amino(X, y, score_type):
     rbf_svc = svm.SVC(kernel='rbf', gamma=0.07, C=C)
 
     if (score_type=="split"):
-        X_1,y_1=pattern_generator.load_dataset("binary",True,"86")
-        W = train_model("dae")
-        X_1 = np.dot(X_1,W)
-        X_train, X_test, y_train, y_test = X , X_1 , y, y_1
+        X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+
         rbf_svc.fit(X_train, y_train)
         y_score = np.array(rbf_svc.predict(X_test))
         y_test = np.array(y_test)
@@ -66,7 +64,7 @@ def train_model(model_type):
         model = pickle.load(pkl_file)
         return model.get_weights(borrow=True)
     elif (model_type=="rbm"):
-        model_train.train_rbm()
+        #model_train.train_rbm()
         pkl_file = open('./rbm.pkl', 'rb')
         model = pickle.load(pkl_file)
         return model.get_weights(borrow=True)
