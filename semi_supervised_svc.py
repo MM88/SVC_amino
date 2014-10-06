@@ -10,7 +10,7 @@ import pickle
 import model_train
 import pattern_generator
 import stacked_dae
-
+from sklearn.metrics import roc_auc_score,accuracy_score,recall_score,matthews_corrcoef
 
 def svc_amino(X, y, score_type):
     """
