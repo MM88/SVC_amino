@@ -64,8 +64,8 @@ def train_model(model_type):
         model = pickle.load(pkl_file)
         return model.get_weights(borrow=True)
     elif (model_type=="rbm"):
-        #model_train.train_rbm()
-        pkl_file = open('./rbm.pkl', 'rb')
+        model_train.train_rbm()
+        pkl_file = open('./rbm_pssm.pkl', 'rb')
         model = pickle.load(pkl_file)
         return model.get_weights(borrow=True)
     elif (model_type=="dbm"):
@@ -77,7 +77,7 @@ def train_model(model_type):
 if __name__=="__main__":
 
     W = train_model("rbm")
-    X,y = pattern_generator.load_dataset("binary",True,"86")
+    X,y = pattern_generator.load_dataset("pssm",True,"86")
     X_new = np.dot(X,W)	
    
    
