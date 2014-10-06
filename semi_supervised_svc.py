@@ -19,12 +19,13 @@ def svc_amino(X, y, score_type):
     :param y:
     :param score_type:
     """
-    C = 70  # SVM regularization parameter
-    rbf_svc = svm.SVC(kernel='rbf', gamma=0.07, C=C)
+    
 
     if (score_type=="split"):
         X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
 
+        C = 1  # SVM regularization parameter
+        rbf_svc = svm.SVC(kernel='rbf', gamma=0.07, C=C)
         rbf_svc.fit(X_train, y_train)
         y_score = np.array(rbf_svc.predict(X_test))
         y_test = np.array(y_test)
@@ -45,6 +46,54 @@ def svc_amino(X, y, score_type):
         print accuracy_score(y_test,y_score)
         print "MCC:"
         print matthews_corrcoef(y_test,y_score)
+
+        C = 100  # SVM regularization parameter
+        rbf_svc = svm.SVC(kernel='rbf', gamma=0.01, C=C)
+        rbf_svc.fit(X_train, y_train)
+        y_score = np.array(rbf_svc.predict(X_test))
+        y_test = np.array(y_test)
+        tn = 0.0
+        fp = 0.0
+
+        for i in range(y_score.shape[0]):
+            if y_test[i]==-1:
+                if y_score[i]==-1:
+                    tn = tn+1
+                else: fp = fp+1
+        spec = tn/(tn+fp)
+        print "sensitivity:"
+        print recall_score(y_test,y_score)
+        print "specificity:"
+        print spec
+        print "accuracy:"
+        print accuracy_score(y_test,y_score)
+        print "MCC:"
+        print matthews_corrcoef(y_test,y_score)
+
+        C = 100  # SVM regularization parameter
+        rbf_svc = svm.SVC(kernel='rbf', gamma=0.001, C=C)
+        rbf_svc.fit(X_train, y_train)
+        y_score = np.array(rbf_svc.predict(X_test))
+        y_test = np.array(y_test)
+        tn = 0.0
+        fp = 0.0
+
+        for i in range(y_score.shape[0]):
+            if y_test[i]==-1:
+                if y_score[i]==-1:
+                    tn = tn+1
+                else: fp = fp+1
+        spec = tn/(tn+fp)
+        print "sensitivity:"
+        print recall_score(y_test,y_score)
+        print "specificity:"
+        print spec
+        print "accuracy:"
+        print accuracy_score(y_test,y_score)
+        print "MCC:"
+        print matthews_corrcoef(y_test,y_score)
+
+
         return "ciao"
         #con binary fa 0.78 con pssm fa 0.80
     else:
@@ -64,7 +113,7 @@ def train_model(model_type):
         model = pickle.load(pkl_file)
         return model.get_weights(borrow=True)
     elif (model_type=="rbm"):
-        model_train.train_rbm()
+        #model_train.train_rbm()
         pkl_file = open('./rbm_pssm.pkl', 'rb')
         model = pickle.load(pkl_file)
         return model.get_weights(borrow=True)
