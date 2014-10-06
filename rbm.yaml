@@ -2,7 +2,7 @@
 !obj:pylearn2.train.Train {
 
     dataset: !obj:pylearn2.datasets.dense_design_matrix.DenseDesignMatrix &dataset {
-                "X" : !obj:pattern_generator.load_dataset {'type':'binary','all_dataset':False,'dataset':'439'},
+                "X" : !obj:pattern_generator.load_dataset {'type':'pssm','all_dataset':False,'dataset':'86'},
                 #"X" : !obj:pattern_generator.dae_input_generator {'all_dataset':False},
              },
 
@@ -11,7 +11,7 @@
     model: !obj:pylearn2.models.rbm.GaussianBinaryRBM {
 
 
-        nvis : 231,
+        nvis : 220,
 
 
         nhid : 500,
@@ -78,13 +78,13 @@
 
             # Denoising score matching uses a corruption process to transform
             # the raw data.  Here we use additive gaussian noise.
-            #corruptor : !obj:pylearn2.corruption.GaussianCorruptor {
-            #        stdev : 0.4
-            #},
-
-            corruptor : !obj:dataset_corruption.ProteinOneHotCorruptor {
-                "corruption_level": 0.5,
+            corruptor : !obj:pylearn2.corruption.GaussianCorruptor {
+                    stdev : 0.4
             },
+
+            #corruptor : !obj:dataset_corruption.ProteinOneHotCorruptor {
+            #    "corruption_level": 0.5,
+            #},
         },
 
         # We'll use the monitoring dataset to figure out when to stop training.
@@ -112,6 +112,6 @@
         },
     
     #Finally, request that the model be saved after each epoch
-       save_path: "./rbm.pkl",
+       save_path: "./rbm_pssm.pkl",
        save_freq: 50
 }
