@@ -2,8 +2,8 @@
 !obj:pylearn2.train.Train {
 
     dataset: !obj:pylearn2.datasets.dense_design_matrix.DenseDesignMatrix &dataset {
-                "X" : !obj:pattern_generator.load_dataset {'type':'pssm','all_dataset':False,'dataset':'86'},
-                #"X" : !obj:pattern_generator.dae_input_generator {'all_dataset':False},
+               # "X" : !obj:pattern_generator.load_dataset {'type':'pssm','all_dataset':False,'dataset':'86'},
+                "X" : !obj:pattern_generator.dae_input_generator {'all_dataset':False},
              },
 
 
@@ -11,7 +11,7 @@
     model: !obj:pylearn2.models.rbm.GaussianBinaryRBM {
 
 
-        nvis : 220,
+        nvis : 105,
 
 
         nhid : 500,
@@ -112,6 +112,6 @@
         },
     
     #Finally, request that the model be saved after each epoch
-       save_path: "./rbm_pssm.pkl",
+       save_path: "./rbm_5.pkl",
        save_freq: 50
 }

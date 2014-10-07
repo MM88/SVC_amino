@@ -20,13 +20,13 @@ def train_dae():
 
 def train_rbm():
 
-    f = open('./rbm_pssm.pkl','wb')
+    f = open('./rbm_5.pkl','wb')
     yaml_file = open ("./rbm.yaml")
     train = yaml_parse.load(yaml_file)
     train.main_loop()
     f.close()
     yaml_file.close()
-    pkl_file = open('./rbm_pssm.pkl', 'rb')
+    pkl_file = open('./rbm_5.pkl', 'rb')
     model = pickle.load(pkl_file)
     return model.get_weights(borrow=True)
 
