@@ -70,7 +70,7 @@ def train_model(model_type):
         return model.get_weights(borrow=True)
     elif (model_type=="rbm"):
         model_train.train_rbm()
-        pkl_file = open('./rbm_5.pkl', 'rb')
+        pkl_file = open('./rbm_11.pkl', 'rb')
         model = pickle.load(pkl_file)
         return model.get_weights(borrow=True)
     elif (model_type=="dbm"):
@@ -83,8 +83,7 @@ if __name__=="__main__":
 
     W = train_model("rbm")
     
-    X,y = pattern_generator.dae_input_generator(True)
+    X,y = pattern_generator.load_dataset("binary",True,"86")
     X_new = np.dot(X,W)
-    X_new2 = pattern_generator.dae_output_resizeing(X_new)
-
-    print svc_amino(X_new2,y,"split")
+   
+    print svc_amino(X_new,y,"split")
