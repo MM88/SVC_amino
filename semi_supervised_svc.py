@@ -69,7 +69,7 @@ def train_model(model_type):
         model = pickle.load(pkl_file)
         return model.get_weights(borrow=True)
     elif (model_type=="rbm"):
-        model_train.train_rbm()
+        #model_train.train_rbm()
         pkl_file = open('./rbm_11.pkl', 'rb')
         model = pickle.load(pkl_file)
         return model.get_weights(borrow=True)
